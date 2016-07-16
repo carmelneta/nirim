@@ -1,0 +1,47 @@
+ 
+
+<ion-header>
+  <ion-toolbar>
+  <ion-buttons start>
+    <button (click)="close()">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+  </ion-buttons> 
+    <ion-buttons end>
+    <button (click)="save()">
+      <ion-icon name="add-circle"></ion-icon>
+    </button>
+  </ion-buttons> 
+</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Tracktor</ion-label>
+      <ion-select [(ngModel)]="tracktorId" (ngModelChange)="tracktorChanged($event)">
+        <ion-option *ngFor="let tracktor of tracktors" value="{{tracktor.id}}">{{tracktor.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Field</ion-label>
+      <ion-select [(ngModel)]="fieldId">
+        <ion-option *ngFor="let field of fields" value="{{field.id}}">{{field.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label>Start Hour</ion-label>
+      <ion-input type="text"  [(ngModel)]="hours"></ion-input>
+    </ion-item>
+  </ion-list>
+ 
+
+   
+
+</ion-content>

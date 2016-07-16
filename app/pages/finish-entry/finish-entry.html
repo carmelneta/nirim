@@ -1,0 +1,44 @@
+ 
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="close()">
+        <ion-icon name="backspace"></ion-icon>
+      </button>
+    </ion-buttons> 
+    <ion-title>סיום עבודה</ion-title>
+    <ion-buttons end>
+    <button (click)="save()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+    </button>
+  </ion-buttons> 
+</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Tracktor</ion-label>
+      <ion-note item-right>{{entry.tracktor}}</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Field</ion-label>
+      <ion-note item-right>{{entry.field}}</ion-note>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label>Start Hour</ion-label>
+      <ion-input type="text"  [(ngModel)]="entry.endHours"></ion-input>
+    </ion-item>
+  </ion-list>
+ 
+
+   
+
+</ion-content>
