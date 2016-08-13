@@ -1,23 +1,33 @@
-import {Component} from '@angular/core';
+import {Component, provide} from '@angular/core';
 import {Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {LoginPage} from './pages/login/login';
 import {TestPage} from './pages/test/test';
 
-import * as firebase from 'firebase';
+import {provideStore} from '@ngrx/store'
+import 'rxjs/Rx';
+
+import {entries} from './providers/stores/entires.store.ts';
+
+// import * as firebase from 'firebase';
+//import {Entery} from './providers/user-data/models';
+
+
 
 @Component({
-   template: '<ion-nav [root]="rootPage"></ion-nav>'
+   template: '<ion-nav [root]="rootPage"></ion-nav>'   
 })
 export class MyApp {
 
   private rootPage:any; 
   
 
-  constructor( private platform:Platform ) {
-   
-     
+  constructor( 
+    private platform:Platform
+  ) {
+
+
      var FbConfig = {
       apiKey: "AIzaSyDpoX6zV0yLsgvhMon2GC3QoFO_cZyjzR8",
       authDomain: "gadash-nirim.firebaseapp.com",
@@ -26,7 +36,7 @@ export class MyApp {
     };
 
     firebase.initializeApp(FbConfig);
-  
+    this.rootPage = LoginPage;
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // If there's a user take him to the home page.
@@ -47,4 +57,6 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp)
+ionicBootstrap(MyApp, [
+  provideStore({ entries })
+]);

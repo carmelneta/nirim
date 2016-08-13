@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import {Observable} from 'rxjs/Observable';
 import {Entery} from '../../providers/user-data/models'; 
-import {UserData} from '../../providers/user-data/user-data';
-
+// import {UserData} from '../../providers/user-data/user-data';
+import {EntiresService} from '../../providers/services/entries.service';
 @Component({
   templateUrl: 'build/pages/finish-entry/finish-entry.html',
-  providers : [UserData]
+  providers : [EntiresService]
 })
 export class FinishEntryPage {
 
@@ -16,7 +16,7 @@ export class FinishEntryPage {
     private nav: NavController,
     private viewCtrl: ViewController,
     _navParams: NavParams,
-    private userData: UserData
+    private entiresService: EntiresService
     ) { 
       this.entry = _navParams.data.entry;            
   }
@@ -28,7 +28,7 @@ export class FinishEntryPage {
 
 
   save(){
-    this.userData.finishEntry(this.entry);
+    this.entiresService.finish(this.entry);
     this.close();
   }
 }

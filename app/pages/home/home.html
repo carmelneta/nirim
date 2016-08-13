@@ -2,7 +2,7 @@
 <ion-header>
   <ion-navbar> 
     <ion-title>
-      Home
+      Home <small>version 0.2</small>
     </ion-title>
 
       <ion-buttons end (click)="showPopover($event)">
@@ -18,9 +18,8 @@
 
 
 <ion-content padding class="home">   
-  <ion-list> 
-
-    <ion-item-sliding  *ngFor="let entry of enteries">
+  <ion-list>    
+    <ion-item-sliding  *ngFor="let entry of entries | async">
       <ion-item>
         <h2>{{entry.tracktor}}</h2>
         <p>{{entry.field}}</p> 

@@ -2,9 +2,9 @@ export class Entery {
   constructor(    
     public status: string,
     public tracktor: string,
-    public field: string,
-    public id?: string,
+    public field: string,    
     public startHours?:number,
+    public id?: string,
     public endHours?:number
   ) { }
 };

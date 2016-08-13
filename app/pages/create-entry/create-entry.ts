@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { Modal, NavController,ViewController, NavParams } from 'ionic-angular';
-
-// import { AngularFire, FirebaseListObservable, FirebaseObjectObservable  } from 'angularfire2';
 import {Observable} from 'rxjs/Observable'; 
 
 import {UserData} from '../../providers/user-data/user-data';
 import {Entery, Tracktor, Field} from '../../providers/user-data/models';
-
+import {EntiresService} from '../../providers/services/entries.service';
 @Component({
   templateUrl: 'build/pages/create-entry/create-entry.html',
-  providers : [UserData]
+  providers : [UserData, EntiresService]
 })
 export class CreateEntryPage {
 
@@ -25,7 +23,9 @@ export class CreateEntryPage {
     // public af: AngularFire,
     _navParams: NavParams,
     private viewCtrl: ViewController,
-    private userData: UserData) { 
+    private userData: UserData,
+    private entiresService: EntiresService
+ ) { 
         
         userData.getAllTracktors().subscribe(tracktor => {
           this.tracktors.push(tracktor);          
@@ -49,15 +49,14 @@ export class CreateEntryPage {
       
   }
 
-  save(){
+  save() {
+    this.entiresService.create( new Entery(
+      'inprogress',
+      this.tracktorId,
+      this.fieldId,
+      this.hours
+    ));     
 
-    this.userData.createEntry({
-      'field': this.fieldId,
-      'tracktor': this.tracktorId,
-      'status': 'inprogress',
-      'startHours': this.hours,
-      'endHours' : null
-    }); 
     this.close();
   }
 

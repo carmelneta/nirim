@@ -1,16 +1,19 @@
-import {Component} from '@angular/core';
+import {Component, Pipe} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 // import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import {MenuController, ionicBootstrap, NavController, Modal, Popover} from 'ionic-angular';
 import * as firebase from 'firebase';
+
 import {LoginPage} from '../login/login';
 import {FinishEntryPage} from '../finish-entry/finish-entry'; 
 import {CreateEntryPage} from '../create-entry/create-entry';
 import {AuthData} from '../../providers/auth-data/auth-data';
 import {UserData} from '../../providers/user-data/user-data';
 
-
 import {Entery} from '../../providers/user-data/models'; 
+import {AppStore} from '../../providers/stores/appstore.model';
+
+import {EntiresService} from '../../providers/services/entries.service';
 
 
 import 'rxjs';
@@ -18,25 +21,21 @@ import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   templateUrl: 'build/pages/home/home.html',
-  providers : [UserData]
+  providers : [UserData, EntiresService]
 })
 export class HomePage {
   
-  public enteries: Entery[] = [];
- 
+  entries: Observable<Array<Entery>>;
+
   constructor( 
     private nav: NavController,
-    private userData : UserData
-    ) { 
+    private userData : UserData, 
+    private entiresService: EntiresService
+  ) { 
+      this.entries = entiresService.entries;
 
-      this.userData.getAllEntries()
-      .subscribe(post => { this.enteries.push(post); });
-      // .flatMap()
-      // .subscribe()
-      ;
 
-      console.log(this.enteries);
-      
+      entiresService.listen();
   } 
 
 
@@ -100,4 +99,3 @@ export class MyPopover{
   } 
 
 }
- 
